@@ -1,0 +1,189 @@
+body {
+  height: 100%;
+  background: #f9f9f9;
+  background-image: url(images/background.png);
+  overflow: hidden;
+}
+.tipsy {
+  font-size: 10px;
+  position: absolute;
+  padding: 5px;
+  z-index: 100000;
+}
+.tipsy-inner {
+  background-color: #bfbfbf;
+  color: #000;
+  font-family: Verdana,Arial;
+  max-width: 200px;
+  padding: 5px 8px 4px 8px;
+  text-align: center;
+}
+/* Rounded corners */
+.tipsy-inner {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+.tipsy-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: 5px dashed #000;
+}
+/* Rules to colour arrows */
+.tipsy-arrow-n {
+  border-bottom-color: #bfbfbf;
+}
+.tipsy-arrow-s {
+  border-top-color: #bfbfbf;
+}
+.tipsy-arrow-e {
+  border-left-color: #bfbfbf;
+}
+.tipsy-arrow-w {
+  border-right-color: #bfbfbf;
+}
+.tipsy-n .tipsy-arrow {
+  top: 0px;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-nw .tipsy-arrow {
+  top: 0;
+  left: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-ne .tipsy-arrow {
+  top: 0;
+  right: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-s .tipsy-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-sw .tipsy-arrow {
+  bottom: 0;
+  left: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-se .tipsy-arrow {
+  bottom: 0;
+  right: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-e .tipsy-arrow {
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-left-style: solid;
+  border-right: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.tipsy-w .tipsy-arrow {
+  left: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-right-style: solid;
+  border-left: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.MainScreen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.MainScreen .MainScreen-main {
+  top: 50px;
+  overflow: auto;
+}
+.MainScreen .MainScreen-header {
+  width: 100%;
+}
+.MainScreen .MainScreen-header .navbar-inner .brand {
+  margin-left: 0px;
+}
+.MainScreen .MainScreen-header .nav {
+  height: 38px;
+}
+.MainScreen .MainScreen-header .nav li {
+  cursor: pointer;
+  height: 100%;
+  line-height: 38px;
+  padding: 0 10px;
+  color: #999999;
+}
+.MainScreen .MainScreen-header .nav li:hover {
+  color: #ffffff;
+}
+.MainScreen .MainScreen-header .nav li.active {
+  text-decoration: none;
+  height: 100%;
+  color: #ffffff;
+}
+.Welcome {
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  margin-top: 60px;
+  overflow: hidden;
+}
+.D3ForceClusterChart {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  margin: 20px 20px 0 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  overflow: auto;
+}
+.D3ForceClusterChart path.arc {
+  fill: #fff;
+}
+.D3ForceClusterChart .node {
+  font-size: 10px;
+  pointer-events: none;
+}
+.D3ForceClusterChart .node circle.nodes {
+  fill: #FE4F18;
+  stroke: #F8F274;
+  stroke-width: 1.5px;
+}
+.D3ForceClusterChart .node circle.origin {
+  fill: #8DB42C;
+  stroke: #CCC;
+  stroke-width: 1px;
+}
+.D3ForceClusterChart .link {
+  stroke: #CCC;
+  stroke-width: 1.5px;
+}
+
