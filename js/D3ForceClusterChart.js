@@ -1,5 +1,11 @@
 var smr = smr || {};
 
+var ua = navigator.userAgent.toLowerCase();
+smr.isChrome = ua.match(/chrome\/([\d.]+)/);
+smr.isSafari = ua.match(/version\/([\d.]+)/);
+smr.isFirefox = ua.match(/firefox\/([\d.]+)/);
+smr.isOpera = ua.match(/opera\/([\d.]+)/);
+
 (function($){
 
 	  var json = {
@@ -92,7 +98,7 @@ var smr = smr || {};
 		      .data(nodes)
 		    .enter().append("g")
 		      .attr("class", "node")
-		      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.depth>0?(d.y-150+(d.weight*5)):d.y) + ")"; })
+		      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + getNodeTranslate(d) + ")"; })
 		    .append("svg:text")
 		      .attr("dx", function(d) { return d.x < 180 ? 12 : -18; })
 		      .attr("dy", ".31em")
@@ -108,6 +114,15 @@ var smr = smr || {};
 		          return 'Weight: ' + d.weight; 
 		        }
 		    });
+	        
+	        function getNodeTranslate(d){
+	        	var translate = (d.depth>0?(d.y-150+(d.weight*5)):d.y);
+	        	if(smr.isFirefox || smr.isOpera){
+	        		return translate <=180 ? translate+15 : translate;
+	        	}else{
+	        		return translate;
+	        	}
+	        }
 	
 	}
 	
