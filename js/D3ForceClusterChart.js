@@ -56,19 +56,48 @@ smr.isOpera = ua.match(/opera\/([\d.]+)/);
 	    ry = h / 2,
 	    rotate = 0;
 
+		var radialGradients=[{id:"radialGradientNodes",endColor:"#FCA000",startColor:"#F8F28A",r:8},
+							 {id:"radialGradientOrigin",endColor:"#006400",startColor:"#6DA202",r:12}];
+		
 		var cluster = d3.layout.cluster()
 		    .size([360, ry - 120])
 		    .sort(function(a, b){return d3.descending(a.weight, b.weight);});
 	
 		var svg = d3.select("#D3ForceClusterChart").append("div")
 		    .style("width", w + "px")
-		    .style("height", 800 + "px");
-	
-		var vis = svg.append("svg:svg")
+		    .style("height", 800 + "px")
+		    .style("overflow", "auto")
+		    .append("svg:svg")
 		    .attr("width", w)
-		    .attr("height", 800)
-		  .append("svg:g")
+		    .attr("height", 800);
+
+
+		
+		var vis = svg.append("svg:g")
 		    .attr("transform", "translate(" + 300 + "," + 350 + ")");
+		
+		var defs = vis.append("defs");
+		
+		var radialGradient = defs.selectAll("radialGradient")
+			.data(radialGradients)
+		  .enter()
+			.append("radialGradient")
+			.attr("id",function(d){return d.id})
+			.attr("r","70%")
+			.attr("cx", "50%")
+		    .attr("cy", "50%")
+		    .attr("rx", "50%")
+		    .attr("ry", "50%");
+		
+		radialGradient.append("stop")
+			.attr("offset","0%")
+			.style("stop-color",function(d){return d.startColor})
+			.style("stop-opacity","1");
+		radialGradient.append("stop")
+			.attr("offset","100%")
+			.style("stop-color",function(d){return d.endColor})
+			.style("stop-opacity","1");
+		
 		
 		  var nodes = cluster.nodes(json);
 		 	  
@@ -88,11 +117,13 @@ smr.isOpera = ua.match(/opera\/([\d.]+)/);
 	
 		  vis.selectAll(".dot")
 			  .data(nodes)
-			.enter().append("circle")
+			.enter().append("ellipse")
 			  .attr("class", function(d){ return (d.depth==0) ? "origin" : "nodes";})
 			  .attr("cx", function(d) { return xs(d); })
 			  .attr("cy", function(d) { return ys(d); })
-			  .attr("r", function(d){ return (d.depth==0) ? 12 : 8; });
+			  .attr("rx", function(d){ return (d.depth==0) ? 12 : 8; })
+			  .attr("ry", function(d){ return (d.depth==0) ? 12 : 8; })
+			  .attr("style",function(d){return (d.depth==0) ? "fill:url(#radialGradientOrigin)" : "fill:url(#radialGradientNodes)";})
 		  
 		  var node = vis.selectAll("g.node")
 		      .data(nodes)
