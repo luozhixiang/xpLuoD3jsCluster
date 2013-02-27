@@ -80,22 +80,34 @@ var smr = smr || {};
 	          .attr("x2", function(d) { return xs(nodes[0]); })
 	          .attr("y2", function(d) { return ys(nodes[0]); });
 	
+		  vis.selectAll(".dot")
+			  .data(nodes)
+			.enter().append("circle")
+			  .attr("class", function(d){ return (d.depth==0) ? "origin" : "nodes";})
+			  .attr("cx", function(d) { return xs(d); })
+			  .attr("cy", function(d) { return ys(d); })
+			  .attr("r", function(d){ return (d.depth==0) ? 12 : 8; });
+		  
 		  var node = vis.selectAll("g.node")
 		      .data(nodes)
 		    .enter().append("g")
 		      .attr("class", "node")
 		      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.depth>0?(d.y-150+(d.weight*5)):d.y) + ")"; })
-	
-		  node.append("svg:circle")
-		  	  .attr("class",function(d){ return (d.depth==0) ? "origin" : "nodes";})
-		      .attr("r"    ,function(d){ return (d.depth==0) ? 12 : 8; });
-	
-		  node.append("svg:text")
+		    .append("svg:text")
 		      .attr("dx", function(d) { return d.x < 180 ? 12 : -18; })
 		      .attr("dy", ".31em")
 		      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
 		      .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-		      .text(function(d) { return d.name+(d.weight ? "("+d.weight+")" :""); });
+		      .text(function(d) { return d.name; });
+		  
+	        $('svg .nodes').tipsy({ 
+		        gravity: 'w', 
+		        html: true, 
+		        title: function() {
+		          var d = this.__data__;
+		          return 'Weight: ' + d.weight; 
+		        }
+		    });
 	
 	}
 	
